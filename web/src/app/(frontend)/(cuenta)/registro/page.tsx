@@ -20,15 +20,14 @@ export default async function RegistroPage() {
 
   return (
     <AuthShell
-      code="A2"
       title="Creá tu cuenta"
       intro={
         <>
           <p>Con tu cuenta:</p>
-          <ul className="space-y-2 font-mono text-sm">
+          <ul className="space-y-1.5 text-sm">
             {BENEFICIOS.map((b) => (
               <li key={b}>
-                <span className="text-signal">›</span> {b}
+                <span className="text-ok">✓</span> {b}
               </li>
             ))}
           </ul>
@@ -42,12 +41,9 @@ export default async function RegistroPage() {
         </>
       )}
       <RegisterForm />
-      <p className="mt-8 border-t border-line pt-6 text-sm text-muted">
+      <p className="mt-6 border-t border-line pt-5 text-sm text-muted">
         ¿Ya tenés cuenta?{' '}
-        <Link
-          href="/ingresar"
-          className="text-ink underline decoration-signal underline-offset-4 hover:text-signal"
-        >
+        <Link href="/ingresar" className="font-semibold text-brand hover:underline">
           Ingresá
         </Link>
       </p>

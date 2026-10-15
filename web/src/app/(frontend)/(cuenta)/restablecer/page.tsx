@@ -15,7 +15,6 @@ export default async function RestablecerPage({
   const { token } = await searchParams
   return (
     <AuthShell
-      code="A4"
       title="Elegí una contraseña nueva"
       intro={<p>Después vas a quedar con la sesión iniciada.</p>}
     >
@@ -24,10 +23,7 @@ export default async function RestablecerPage({
       ) : (
         <div className="space-y-4">
           <FormMessage>Falta el enlace de recuperación.</FormMessage>
-          <Link
-            href="/recuperar"
-            className="text-sm text-ink underline decoration-signal underline-offset-4"
-          >
+          <Link href="/recuperar" className="text-sm font-semibold text-brand hover:underline">
             Pedir uno nuevo
           </Link>
         </div>

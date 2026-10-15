@@ -1,95 +1,49 @@
 @import 'tailwindcss';
 
 @theme {
-  --font-sans: var(--font-plex-sans), ui-sans-serif, system-ui, sans-serif;
-  --font-mono: var(--font-plex-mono), ui-monospace, monospace;
+  --font-sans: var(--font-dm-sans), ui-sans-serif, system-ui, sans-serif;
 
-  /* Grafito: fondos y superficies */
-  --color-base: #0b0e11;
-  --color-panel: #12161b;
-  --color-raised: #181d23;
-  --color-line: #232a32;
-  --color-line-strong: #333c46;
+  /* Superficies */
+  --color-bg: #f3f4f6;
+  --color-card: #ffffff;
+  --color-line: #e5e7eb;
 
   /* Texto */
-  --color-ink: #f5f7fa;
-  --color-body: #c3cbd3;
-  --color-muted: #7d8894;
+  --color-ink: #111827;
+  --color-body: #374151;
+  --color-muted: #6b7280;
 
-  /* Acento: naranja de señalización. Estados técnicos. */
-  --color-signal: #ff7a1a;
-  --color-signal-dim: #b4520d;
-  --color-ok: #3ccf91;
-  --color-warn: #f2c94c;
-  --color-fault: #ff5d5d;
+  /* Marca */
+  --color-brand: #ff5a1f;
+  --color-brand-dark: #e64a12;
+  --color-brand-soft: #fff1eb;
+  --color-navy: #0f172a;
+
+  /* Estados */
+  --color-ok: #059669;
+  --color-ok-soft: #ecfdf5;
+  --color-info: #1d4ed8;
+  --color-info-soft: #eff6ff;
+  --color-danger: #dc2626;
+  --color-danger-soft: #fef2f2;
 }
 
 @layer base {
   html {
-    color-scheme: dark;
     -webkit-text-size-adjust: 100%;
   }
 
   body {
-    @apply bg-base text-body font-sans antialiased;
+    @apply bg-bg text-ink font-sans antialiased;
     min-height: 100dvh;
   }
 
   ::selection {
-    @apply bg-signal text-base;
+    @apply bg-brand text-white;
   }
 
   :focus-visible {
-    outline: 2px solid var(--color-signal);
+    outline: 2px solid var(--color-brand);
     outline-offset: 2px;
-  }
-}
-
-@layer components {
-  /* Grilla de plano técnico de fondo */
-  .blueprint {
-    background-image:
-      linear-gradient(to right, rgb(255 255 255 / 0.035) 1px, transparent 1px),
-      linear-gradient(to bottom, rgb(255 255 255 / 0.035) 1px, transparent 1px);
-    background-size: 32px 32px;
-  }
-
-  /* Marcas de esquina tipo encuadre */
-  .brackets {
-    position: relative;
-  }
-  .brackets::before,
-  .brackets::after {
-    content: '';
-    position: absolute;
-    width: 10px;
-    height: 10px;
-    border-color: var(--color-signal);
-    pointer-events: none;
-  }
-  .brackets::before {
-    top: -1px;
-    left: -1px;
-    border-top-width: 2px;
-    border-left-width: 2px;
-  }
-  .brackets::after {
-    bottom: -1px;
-    right: -1px;
-    border-bottom-width: 2px;
-    border-right-width: 2px;
-  }
-
-  .label {
-    @apply font-mono text-[11px] uppercase tracking-[0.18em] text-muted;
-  }
-
-  /* Cinta de advertencia, usada como separador fino */
-  .hazard {
-    background-image: repeating-linear-gradient(
-      -45deg,
-      var(--color-signal) 0 8px,
-      transparent 8px 16px
-    );
   }
 }

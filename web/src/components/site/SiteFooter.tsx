@@ -4,30 +4,64 @@ import { getPayloadClient } from '@/lib/auth'
 
 import { Logo } from './Logo'
 
+const COLUMNAS = [
+  {
+    titulo: 'Comprar',
+    links: [
+      { href: '/tienda?categoria=celulares', label: 'Celulares nuevos' },
+      { href: '/tienda?categoria=usados', label: 'Usados certificados' },
+      { href: '/tienda?categoria=cargadores', label: 'Accesorios' },
+      { href: '/tienda?categoria=gaming', label: 'Gaming' },
+    ],
+  },
+  {
+    titulo: 'Servicio técnico',
+    links: [
+      { href: '/turnos', label: 'Pedir turno' },
+      { href: '/seguimiento', label: 'Seguir mi reparación' },
+      { href: '/cuenta', label: 'Mi cuenta' },
+    ],
+  },
+]
+
 export async function SiteFooter() {
   const payload = await getPayloadClient()
   const negocio = await payload.findGlobal({ slug: 'negocio' }).catch(() => null)
+  const ig = negocio?.instagram?.replace(/^@/, '')
 
   return (
-    <footer className="mt-24 border-t border-line">
-      <div className="hazard h-1 opacity-60" aria-hidden="true" />
-      <div className="mx-auto grid max-w-6xl gap-10 px-4 py-12 sm:px-6 md:grid-cols-[1.4fr_1fr_1fr]">
-        <div className="space-y-4">
+    <footer className="mt-16 border-t border-line bg-card">
+      <div className="mx-auto grid max-w-7xl gap-10 px-4 py-12 text-sm text-muted sm:px-6 md:grid-cols-[2fr_1fr_1fr_1fr]">
+        <div className="space-y-3">
           <Logo />
-          <p className="max-w-sm text-sm leading-relaxed text-muted">
-            Servicio técnico de celulares, computadoras y tablets. Equipos sellados y usados
-            certificados, accesorios y periféricos gaming.
+          <p className="max-w-xs leading-relaxed">
+            Tienda de tecnología y servicio técnico en {negocio?.direccion || 'Firmat, Santa Fe'}.
           </p>
         </div>
 
-        <div className="space-y-3">
-          <p className="label">Contacto</p>
-          <ul className="space-y-2 text-sm">
+        {COLUMNAS.map((col) => (
+          <div key={col.titulo}>
+            <h2 className="mb-3 font-semibold text-ink">{col.titulo}</h2>
+            <ul className="space-y-2">
+              {col.links.map((l) => (
+                <li key={l.href}>
+                  <Link href={l.href} className="hover:text-brand">
+                    {l.label}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </div>
+        ))}
+
+        <div>
+          <h2 className="mb-3 font-semibold text-ink">Contacto</h2>
+          <ul className="space-y-2">
             <li>{negocio?.direccion || 'Firmat, Santa Fe'}</li>
             {negocio?.whatsapp && (
               <li>
                 <a
-                  className="hover:text-signal"
+                  className="hover:text-brand"
                   href={`https://wa.me/${negocio.whatsapp}`}
                   target="_blank"
                   rel="noopener noreferrer"
@@ -36,51 +70,37 @@ export async function SiteFooter() {
                 </a>
               </li>
             )}
+            {ig && (
+              <li>
+                <a
+                  className="hover:text-brand"
+                  href={`https://instagram.com/${ig}`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  Instagram
+                </a>
+              </li>
+            )}
             {negocio?.email && (
               <li>
-                <a className="hover:text-signal" href={`mailto:${negocio.email}`}>
+                <a className="hover:text-brand" href={`mailto:${negocio.email}`}>
                   {negocio.email}
                 </a>
               </li>
             )}
-            {negocio?.instagram && (
-              <li>
-                <a
-                  className="hover:text-signal"
-                  href={`https://instagram.com/${negocio.instagram.replace(/^@/, '')}`}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  @{negocio.instagram.replace(/^@/, '')}
-                </a>
+            {negocio?.horarios?.map((h) => (
+              <li key={h.id}>
+                {h.dias}: {h.horario}
               </li>
-            )}
+            ))}
           </ul>
-        </div>
-
-        <div className="space-y-3">
-          <p className="label">Horarios</p>
-          {negocio?.horarios?.length ? (
-            <dl className="space-y-2 text-sm">
-              {negocio.horarios.map((h) => (
-                <div key={h.id} className="flex justify-between gap-4">
-                  <dt className="text-muted">{h.dias}</dt>
-                  <dd className="font-mono text-xs text-ink">{h.horario}</dd>
-                </div>
-              ))}
-            </dl>
-          ) : (
-            <p className="text-sm text-muted">Atención con turno web.</p>
-          )}
         </div>
       </div>
       <div className="border-t border-line">
-        <div className="mx-auto flex max-w-6xl flex-wrap items-center justify-between gap-3 px-4 py-5 font-mono text-[11px] text-muted sm:px-6">
-          <span>© {new Date().getFullYear()} FIRMATECH · FIRMAT, SANTA FE, AR</span>
-          <Link href="/seguimiento" className="hover:text-signal">
-            SEGUIR MI REPARACIÓN →
-          </Link>
-        </div>
+        <p className="mx-auto max-w-7xl px-4 py-5 text-[13px] text-muted sm:px-6">
+          © {new Date().getFullYear()} Firmatech · Firmat, Santa Fe, Argentina
+        </p>
       </div>
     </footer>
   )

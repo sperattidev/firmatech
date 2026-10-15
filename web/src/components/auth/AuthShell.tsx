@@ -1,27 +1,20 @@
 import type { ReactNode } from 'react'
 
 export function AuthShell({
-  code,
   title,
   intro,
   children,
 }: {
-  code: string
   title: string
-  intro: ReactNode
+  intro?: ReactNode
   children: ReactNode
 }) {
   return (
-    <section className="blueprint border-b border-line">
-      <div className="mx-auto grid max-w-6xl gap-10 px-4 py-14 sm:px-6 md:grid-cols-[1fr_minmax(0,440px)] md:py-20">
-        <div className="space-y-5 md:pt-6">
-          <p className="label">
-            <span className="text-signal">{code}</span> / Cuenta
-          </p>
-          <h1 className="text-3xl font-semibold tracking-tight text-ink sm:text-4xl">{title}</h1>
-          <div className="max-w-md space-y-3 leading-relaxed text-muted">{intro}</div>
-        </div>
-        <div className="brackets border border-line bg-panel p-6 sm:p-8">{children}</div>
+    <section className="mx-auto max-w-md px-4 py-10 sm:py-14">
+      <div className="rounded-3xl border border-line bg-card p-6 shadow-sm sm:p-8">
+        <h1 className="text-2xl font-bold tracking-[-0.02em]">{title}</h1>
+        {intro && <div className="mt-2 space-y-3 leading-relaxed text-muted">{intro}</div>}
+        <div className="mt-6">{children}</div>
       </div>
     </section>
   )
@@ -33,7 +26,7 @@ export function GoogleButton({ next }: { next?: string }) {
     // Enlace común (no <Link>): es una ruta de servidor que redirige a Google.
     <a
       href={href}
-      className="flex w-full items-center justify-center gap-3 border border-line-strong bg-raised px-5 py-3 text-sm font-medium text-ink transition-colors hover:border-ink"
+      className="flex h-12 w-full items-center justify-center gap-3 rounded-xl border border-line bg-card text-[15px] font-semibold text-ink transition-colors hover:border-ink"
     >
       <svg width="18" height="18" viewBox="0 0 48 48" aria-hidden="true">
         <path
@@ -62,7 +55,7 @@ export function Divider({ children }: { children: ReactNode }) {
   return (
     <div className="my-6 flex items-center gap-3">
       <span className="h-px flex-1 bg-line" />
-      <span className="label">{children}</span>
+      <span className="text-sm text-muted">{children}</span>
       <span className="h-px flex-1 bg-line" />
     </div>
   )

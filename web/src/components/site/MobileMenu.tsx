@@ -4,7 +4,7 @@ import { usePathname } from 'next/navigation'
 import { useEffect, useRef, type ReactNode } from 'react'
 
 /** <details> nativo (funciona sin JS); con JS se cierra al navegar o al tocar afuera. */
-export function MobileMenu({ children }: { children: ReactNode }) {
+export function MobileMenu({ summary, children }: { summary: ReactNode; children: ReactNode }) {
   const ref = useRef<HTMLDetailsElement>(null)
   const pathname = usePathname()
 
@@ -23,8 +23,13 @@ export function MobileMenu({ children }: { children: ReactNode }) {
   }, [])
 
   return (
-    <details ref={ref} className="group relative md:hidden">
-      {children}
+    <details ref={ref} className="relative">
+      <summary className="cursor-pointer list-none [&::-webkit-details-marker]:hidden">
+        {summary}
+      </summary>
+      <div className="absolute right-0 mt-2 w-[min(20rem,calc(100vw-2rem))] rounded-2xl border border-line bg-card p-2 shadow-xl">
+        {children}
+      </div>
     </details>
   )
 }

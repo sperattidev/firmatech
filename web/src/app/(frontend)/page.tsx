@@ -1,198 +1,208 @@
+import Link from 'next/link'
+
+import { PhoneArt } from '@/components/site/PhoneArt'
 import { ButtonLink } from '@/components/ui/Button'
+import {
+  IconArrow,
+  IconBattery,
+  IconCard,
+  IconCheck,
+  IconCode,
+  IconGamepad,
+  IconLaptop,
+  IconLayers,
+  IconPhone,
+  IconPlug,
+  IconShield,
+  IconTablet,
+  IconTruck,
+} from '@/components/ui/icons'
 
-const SERVICIOS = [
+const BENEFICIOS = [
+  { Icon: IconCard, titulo: 'Pagá como quieras', texto: 'Mercado Pago, transferencia o efectivo' },
+  { Icon: IconTruck, titulo: 'Envío en la zona', texto: 'Firmat y alrededores, o retirás' },
+  { Icon: IconShield, titulo: 'Garantía escrita', texto: 'En equipos y reparaciones' },
+  { Icon: IconCheck, titulo: 'Usados verificados', texto: 'IMEI, batería y estado informados' },
+]
+
+const CATEGORIAS = [
   {
-    code: 'S-01',
-    title: 'Celulares',
-    items: ['Módulos y pantallas', 'Baterías', 'Pin de carga', 'Microsoldadura'],
+    href: '/tienda?categoria=celulares',
+    Icon: IconPhone,
+    titulo: 'Celulares nuevos',
+    texto: 'Sellados en caja',
   },
   {
-    code: 'S-02',
-    title: 'Computadoras',
-    items: ['Diagnóstico de placa', 'Limpieza y pasta térmica', 'Upgrades SSD / RAM', 'Notebooks'],
+    href: '/tienda?categoria=usados',
+    Icon: IconCheck,
+    titulo: 'Usados certificados',
+    texto: 'Revisados en el taller',
   },
   {
-    code: 'S-03',
-    title: 'Tablets',
-    items: ['Táctiles y displays', 'Baterías', 'Conectores', 'Recuperación'],
+    href: '/tienda?categoria=cargadores',
+    Icon: IconPlug,
+    titulo: 'Cargadores y cables',
+    texto: 'Originales y certificados',
   },
   {
-    code: 'S-04',
-    title: 'Software',
-    items: ['Formateo e instalación', 'Respaldo de datos', 'Eliminación de virus', 'Optimización'],
+    href: '/tienda?categoria=protectores',
+    Icon: IconLayers,
+    titulo: 'Fundas y templados',
+    texto: 'Para cada modelo',
+  },
+  {
+    href: '/tienda?categoria=gaming',
+    Icon: IconGamepad,
+    titulo: 'Gaming',
+    texto: 'Teclados, mouse y auriculares',
   },
 ]
 
-const TIENDA = [
-  { code: 'T-01', title: 'Celulares sellados', desc: 'Equipos OEM en caja, con garantía.' },
-  {
-    code: 'T-02',
-    title: 'Usados certificados',
-    desc: 'Cada unidad con IMEI, % de batería y grado estético informados.',
-  },
-  {
-    code: 'T-03',
-    title: 'Accesorios críticos',
-    desc: 'Cargadores, cables, templados y fundas que sí funcionan.',
-  },
-  { code: 'T-04', title: 'Periféricos gaming', desc: 'Teclados, mouse, auriculares y más.' },
-]
-
-const PASOS = [
-  { n: '01', t: 'Pedís turno', d: 'Desde la web, en menos de un minuto.' },
-  { n: '02', t: 'Ingreso del equipo', d: 'Lo registramos con fotos y te damos un código.' },
-  { n: '03', t: 'Diagnóstico y presupuesto', d: 'Lo ves y lo aprobás online.' },
-  { n: '04', t: 'Reparación y retiro', d: 'Seguís cada etapa hasta que está listo.' },
-]
-
-const EJEMPLO = [
-  { estado: 'Ingresado', hora: '09:12', done: true },
-  { estado: 'En diagnóstico', hora: '10:40', done: true },
-  { estado: 'Presupuesto aprobado', hora: '11:05', done: true },
-  { estado: 'En reparación', hora: 'ahora', done: false, active: true },
-  { estado: 'Listo para retirar', hora: '—', done: false },
+const REPARACIONES = [
+  { Icon: IconPhone, titulo: 'Cambio de pantalla', texto: 'Celulares y tablets' },
+  { Icon: IconBattery, titulo: 'Cambio de batería', texto: 'Celulares y notebooks' },
+  { Icon: IconLaptop, titulo: 'Limpieza y mantenimiento', texto: 'Notebooks y PC' },
+  { Icon: IconPlug, titulo: 'Pin de carga', texto: 'Celulares y tablets' },
+  { Icon: IconTablet, titulo: 'Táctil y display', texto: 'Tablets' },
+  { Icon: IconCode, titulo: 'Software y datos', texto: 'Formateo, respaldo, virus' },
 ]
 
 export default function HomePage() {
   return (
-    <>
-      <section className="blueprint relative overflow-hidden border-b border-line">
-        <div className="mx-auto grid max-w-6xl items-center gap-12 px-4 py-16 sm:px-6 md:py-24 lg:grid-cols-[1.15fr_1fr]">
-          <div className="space-y-7">
-            <p className="label">
-              <span className="text-signal">●</span> Servicio técnico · Firmat, Santa Fe
+    <div className="mx-auto max-w-7xl px-4 sm:px-6">
+      <section className="grid gap-4 py-6 lg:grid-cols-[1.6fr_1fr]">
+        <div className="relative flex min-h-[340px] flex-col justify-center overflow-hidden rounded-3xl bg-navy p-8 text-white sm:p-10">
+          <div className="relative z-10 max-w-md">
+            <p className="text-xs font-bold tracking-[0.08em] text-[#ffb38f] uppercase">
+              Servicio técnico
             </p>
-            <h1 className="text-4xl font-semibold leading-[1.05] tracking-tight text-ink sm:text-5xl lg:text-6xl">
-              Reparamos tu equipo.
-              <br />
-              <span className="text-muted">Vos seguís cada paso.</span>
+            <h1 className="mt-3 text-4xl leading-[1.05] font-bold tracking-[-0.035em] sm:text-[46px]">
+              Reparamos tu equipo y lo seguís online.
             </h1>
-            <p className="max-w-lg text-lg leading-relaxed">
-              Celulares, computadoras y tablets con diagnóstico claro, presupuesto aprobado online y
-              estado en tiempo real desde la web.
+            <p className="mt-4 leading-relaxed text-slate-300">
+              Celulares, computadoras y tablets. Presupuesto que aprobás desde la web, repuestos de
+              calidad y garantía escrita.
             </p>
-            <div className="flex flex-wrap gap-3">
-              <ButtonLink href="/turnos">Pedir turno</ButtonLink>
-              <ButtonLink href="/seguimiento" variant="secondary">
-                Seguir mi reparación
-              </ButtonLink>
-            </div>
+            <ButtonLink href="/turnos" className="mt-6">
+              Pedir turno
+            </ButtonLink>
           </div>
-
-          <figure
-            className="brackets border border-line bg-panel/90"
-            aria-label="Ejemplo de seguimiento de una reparación"
+          <div
+            className="absolute -right-2 -bottom-16 hidden rotate-[14deg] lg:block"
+            aria-hidden="true"
           >
-            <div className="flex items-center justify-between border-b border-line px-5 py-3">
-              <span className="font-mono text-xs text-ink">ORDEN FT-2026-0142</span>
-              <span className="font-mono text-[10px] uppercase tracking-widest text-muted">
-                Ejemplo
-              </span>
-            </div>
-            <div className="space-y-1 px-5 py-4">
-              <p className="text-sm text-ink">iPhone 13 · cambio de módulo</p>
-              <p className="font-mono text-xs text-muted">Técnico asignado · garantía 90 días</p>
-            </div>
-            <ol className="border-t border-line px-5 py-4">
-              {EJEMPLO.map((paso) => (
-                <li key={paso.estado} className="flex items-center gap-4 py-2">
-                  <span
-                    className={`h-2.5 w-2.5 shrink-0 ${
-                      paso.active
-                        ? 'animate-pulse bg-signal'
-                        : paso.done
-                          ? 'bg-ok'
-                          : 'border border-line-strong'
-                    }`}
-                    aria-hidden="true"
-                  />
-                  <span
-                    className={`flex-1 text-sm ${paso.active ? 'text-ink' : paso.done ? 'text-body' : 'text-muted'}`}
-                  >
-                    {paso.estado}
-                  </span>
-                  <span className="font-mono text-[11px] text-muted">{paso.hora}</span>
-                </li>
-              ))}
-            </ol>
-          </figure>
+            <PhoneArt width={130} />
+          </div>
+        </div>
+
+        <div className="flex flex-col justify-center rounded-3xl border border-line bg-card p-8">
+          <p className="text-[13px] font-bold tracking-[0.06em] text-brand uppercase">
+            Seguimiento
+          </p>
+          <h2 className="mt-2 text-2xl font-bold tracking-[-0.02em]">¿Dónde está mi equipo?</h2>
+          <p className="mt-1 text-muted">Ingresá el código de tu comprobante.</p>
+          <form action="/seguimiento" className="mt-5 flex gap-2">
+            <input
+              name="codigo"
+              required
+              placeholder="FT-0142"
+              aria-label="Código de seguimiento"
+              autoComplete="off"
+              className="h-12 min-w-0 flex-1 rounded-xl border border-line px-3.5 text-[15px] uppercase placeholder:normal-case focus:border-ink focus:outline-none"
+            />
+            <button className="h-12 rounded-xl bg-navy px-5 font-semibold text-white hover:bg-black">
+              Ver estado
+            </button>
+          </form>
+          <p className="mt-3 text-[13px] text-muted">
+            Con tu{' '}
+            <Link href="/cuenta" className="font-medium text-ink underline underline-offset-2">
+              cuenta
+            </Link>{' '}
+            ves el diagnóstico, el presupuesto y las fotos.
+          </p>
         </div>
       </section>
 
-      <Section code="01" title="Servicio técnico" kicker="Hardware y software">
-        <div className="grid gap-px border border-line bg-line sm:grid-cols-2 lg:grid-cols-4">
-          {SERVICIOS.map((s) => (
-            <article key={s.code} className="group bg-base p-6 transition-colors hover:bg-panel">
-              <p className="font-mono text-[11px] text-muted group-hover:text-signal">{s.code}</p>
-              <h3 className="mt-6 text-xl font-semibold text-ink">{s.title}</h3>
-              <ul className="mt-4 space-y-1.5 text-sm text-muted">
-                {s.items.map((i) => (
-                  <li key={i}>— {i}</li>
-                ))}
-              </ul>
-            </article>
-          ))}
-        </div>
-      </Section>
+      <section
+        aria-label="Beneficios"
+        className="grid gap-4 rounded-2xl border border-line bg-card p-5 sm:grid-cols-2 lg:grid-cols-4"
+      >
+        {BENEFICIOS.map(({ Icon, titulo, texto }) => (
+          <div key={titulo} className="flex items-center gap-3">
+            <span className="grid h-10 w-10 flex-none place-items-center rounded-xl bg-brand-soft text-brand">
+              <Icon size={20} />
+            </span>
+            <span className="text-sm">
+              <b className="block">{titulo}</b>
+              <span className="text-muted">{texto}</span>
+            </span>
+          </div>
+        ))}
+      </section>
 
-      <Section code="02" title="Cómo funciona el seguimiento" kicker="Trazabilidad completa">
-        <ol className="grid gap-8 md:grid-cols-4">
-          {PASOS.map((p) => (
-            <li key={p.n} className="space-y-3 border-t border-line-strong pt-5">
-              <span className="font-mono text-sm text-signal">{p.n}</span>
-              <h3 className="font-semibold text-ink">{p.t}</h3>
-              <p className="text-sm text-muted">{p.d}</p>
-            </li>
-          ))}
-        </ol>
-      </Section>
-
-      <Section code="03" title="Tienda" kicker="Equipos y accesorios">
-        <div className="grid gap-4 sm:grid-cols-2">
-          {TIENDA.map((t) => (
-            <article
-              key={t.code}
-              className="flex items-start justify-between gap-6 border border-line bg-panel p-6"
+      <Section titulo="Comprá por categoría" link={{ href: '/tienda', label: 'Ver tienda' }}>
+        <div className="grid grid-cols-2 gap-3.5 md:grid-cols-3 lg:grid-cols-5">
+          {CATEGORIAS.map(({ href, Icon, titulo, texto }) => (
+            <Link
+              key={href}
+              href={href}
+              className="group rounded-2xl border border-line bg-card p-5 transition-shadow hover:shadow-lg hover:shadow-black/5"
             >
-              <div className="space-y-2">
-                <h3 className="text-lg font-semibold text-ink">{t.title}</h3>
-                <p className="text-sm text-muted">{t.desc}</p>
-              </div>
-              <span className="font-mono text-[11px] text-muted">{t.code}</span>
-            </article>
+              <span className="grid aspect-[4/3] place-items-center rounded-xl bg-bg text-ink transition-colors group-hover:text-brand">
+                <Icon size={40} strokeWidth={1.4} />
+              </span>
+              <h3 className="mt-4 font-semibold">{titulo}</h3>
+              <p className="text-sm text-muted">{texto}</p>
+            </Link>
           ))}
         </div>
-        <div className="mt-8">
-          <ButtonLink href="/tienda" variant="secondary">
-            Ver la tienda
-          </ButtonLink>
+      </Section>
+
+      <Section titulo="Reparaciones más pedidas" link={{ href: '/turnos', label: 'Pedir turno' }}>
+        <div className="grid gap-3.5 md:grid-cols-2 lg:grid-cols-3">
+          {REPARACIONES.map(({ Icon, titulo, texto }) => (
+            <Link
+              key={titulo}
+              href="/turnos"
+              className="group flex items-center gap-4 rounded-2xl border border-line bg-card p-5 hover:border-ink"
+            >
+              <span className="grid h-11 w-11 flex-none place-items-center rounded-xl bg-brand-soft text-brand">
+                <Icon size={22} />
+              </span>
+              <span className="min-w-0 flex-1">
+                <b className="block">{titulo}</b>
+                <span className="text-sm text-muted">{texto}</span>
+              </span>
+              <IconArrow
+                size={18}
+                className="text-muted transition-transform group-hover:translate-x-0.5 group-hover:text-ink"
+              />
+            </Link>
+          ))}
         </div>
       </Section>
-    </>
+    </div>
   )
 }
 
 function Section({
-  code,
-  title,
-  kicker,
+  titulo,
+  link,
   children,
 }: {
-  code: string
-  title: string
-  kicker: string
+  titulo: string
+  link: { href: string; label: string }
   children: React.ReactNode
 }) {
   return (
-    <section className="mx-auto max-w-6xl px-4 pt-20 sm:px-6 md:pt-28">
-      <header className="mb-10 flex flex-wrap items-end justify-between gap-4">
-        <div className="space-y-3">
-          <p className="label">
-            <span className="text-signal">{code}</span> / {kicker}
-          </p>
-          <h2 className="text-2xl font-semibold tracking-tight text-ink sm:text-3xl">{title}</h2>
-        </div>
-      </header>
+    <section className="pt-10">
+      <div className="mb-4 flex items-baseline justify-between gap-4">
+        <h2 className="text-2xl font-bold tracking-[-0.02em]">{titulo}</h2>
+        <Link href={link.href} className="text-sm font-semibold text-brand hover:underline">
+          {link.label} →
+        </Link>
+      </div>
       {children}
     </section>
   )

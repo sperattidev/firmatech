@@ -1,5 +1,5 @@
 import type { Metadata, Viewport } from 'next'
-import { IBM_Plex_Mono, IBM_Plex_Sans } from 'next/font/google'
+import { DM_Sans } from 'next/font/google'
 import React from 'react'
 
 import { SiteFooter } from '@/components/site/SiteFooter'
@@ -7,17 +7,10 @@ import { SiteHeader } from '@/components/site/SiteHeader'
 import { siteUrl } from '@/lib/site'
 import './styles.css'
 
-const plexSans = IBM_Plex_Sans({
+const dmSans = DM_Sans({
   subsets: ['latin'],
   weight: ['400', '500', '600', '700'],
-  variable: '--font-plex-sans',
-  display: 'swap',
-})
-
-const plexMono = IBM_Plex_Mono({
-  subsets: ['latin'],
-  weight: ['400', '500', '600'],
-  variable: '--font-plex-mono',
+  variable: '--font-dm-sans',
   display: 'swap',
 })
 
@@ -27,11 +20,11 @@ export const dynamic = 'force-dynamic'
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl()),
   title: {
-    default: 'Firmatech · Reparación y tecnología en Firmat',
+    default: 'Firmatech · Tecnología y servicio técnico en Firmat',
     template: '%s · Firmatech',
   },
   description:
-    'Servicio técnico de celulares, computadoras y tablets en Firmat, Santa Fe. Seguí tu reparación online. Celulares sellados y usados certificados, accesorios y periféricos gaming.',
+    'Celulares nuevos y usados certificados, accesorios y gaming. Servicio técnico de celulares, computadoras y tablets en Firmat, Santa Fe, con seguimiento online.',
   openGraph: {
     type: 'website',
     locale: 'es_AR',
@@ -40,12 +33,12 @@ export const metadata: Metadata = {
 }
 
 export const viewport: Viewport = {
-  themeColor: '#0b0e11',
+  themeColor: '#0f172a',
 }
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="es-AR" className={`${plexSans.variable} ${plexMono.variable}`}>
+    <html lang="es-AR" className={dmSans.variable}>
       <body className="flex min-h-dvh flex-col">
         <SiteHeader />
         <main className="flex-1">{children}</main>

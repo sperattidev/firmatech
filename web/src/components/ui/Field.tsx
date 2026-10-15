@@ -1,4 +1,4 @@
-import type { ComponentProps } from 'react'
+import type { ComponentProps, ReactNode } from 'react'
 
 type FieldProps = ComponentProps<'input'> & {
   label: string
@@ -12,7 +12,7 @@ export function Field({ label, name, error, hint, id, className = '', ...props }
   const describedBy = error ? `${inputId}-error` : hint ? `${inputId}-hint` : undefined
   return (
     <div className={`space-y-1.5 ${className}`}>
-      <label htmlFor={inputId} className="label block">
+      <label htmlFor={inputId} className="block text-sm font-semibold text-ink">
         {label}
       </label>
       <input
@@ -20,15 +20,15 @@ export function Field({ label, name, error, hint, id, className = '', ...props }
         name={name}
         aria-invalid={error ? true : undefined}
         aria-describedby={describedBy}
-        className="block w-full border border-line-strong bg-base px-3.5 py-3 text-[15px] text-ink placeholder:text-muted/60 transition-colors focus:border-signal focus:outline-none aria-invalid:border-fault"
+        className="block h-12 w-full rounded-xl border border-line bg-card px-3.5 text-[15px] text-ink placeholder:text-muted/70 transition-colors focus:border-ink focus:outline-none aria-invalid:border-danger"
         {...props}
       />
       {error ? (
-        <p id={`${inputId}-error`} className="font-mono text-xs text-fault">
+        <p id={`${inputId}-error`} className="text-sm text-danger">
           {error}
         </p>
       ) : hint ? (
-        <p id={`${inputId}-hint`} className="text-xs text-muted">
+        <p id={`${inputId}-hint`} className="text-sm text-muted">
           {hint}
         </p>
       ) : null}
@@ -41,13 +41,13 @@ export function FormMessage({
   children,
 }: {
   tone?: 'error' | 'ok'
-  children: React.ReactNode
+  children: ReactNode
 }) {
-  const color = tone === 'ok' ? 'border-ok/40 text-ok' : 'border-fault/40 text-fault'
+  const color = tone === 'ok' ? 'bg-ok-soft text-ok' : 'bg-danger-soft text-danger'
   return (
     <p
       role={tone === 'error' ? 'alert' : 'status'}
-      className={`border-l-2 bg-raised px-4 py-3 text-sm ${color}`}
+      className={`rounded-xl px-4 py-3 text-sm font-medium ${color}`}
     >
       {children}
     </p>

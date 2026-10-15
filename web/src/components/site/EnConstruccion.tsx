@@ -1,16 +1,14 @@
 import { ButtonLink } from '@/components/ui/Button'
 
 /** Marcador para secciones de fases futuras. El sitio no es público hasta terminarlas. */
-export function EnConstruccion({ code, title }: { code: string; title: string }) {
+export function EnConstruccion({ title }: { title: string }) {
   return (
-    <section className="blueprint border-b border-line">
-      <div className="mx-auto max-w-6xl space-y-6 px-4 py-24 sm:px-6">
-        <p className="label">
-          <span className="text-signal">{code}</span> / En construcción
-        </p>
-        <h1 className="text-3xl font-semibold tracking-tight text-ink sm:text-4xl">{title}</h1>
-        <p className="max-w-md text-muted">Esta sección está en desarrollo.</p>
-        <ButtonLink href="/" variant="secondary">
+    <section className="mx-auto max-w-7xl px-4 py-10 sm:px-6">
+      <div className="rounded-3xl border border-line bg-card px-6 py-16 text-center">
+        <p className="text-[13px] font-bold tracking-[0.06em] text-brand uppercase">Próximamente</p>
+        <h1 className="mt-2 text-3xl font-bold tracking-[-0.03em]">{title}</h1>
+        <p className="mx-auto mt-2 max-w-md text-muted">Estamos preparando esta sección.</p>
+        <ButtonLink href="/" variant="secondary" className="mt-6">
           Volver al inicio
         </ButtonLink>
       </div>

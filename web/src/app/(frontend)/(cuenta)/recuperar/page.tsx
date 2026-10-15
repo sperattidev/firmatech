@@ -8,7 +8,6 @@ export const metadata: Metadata = { title: 'Recuperar contraseña', robots: { in
 export default function RecuperarPage() {
   return (
     <AuthShell
-      code="A3"
       title="Recuperar contraseña"
       intro={<p>Te mandamos un enlace a tu correo para que elijas una contraseña nueva.</p>}
     >

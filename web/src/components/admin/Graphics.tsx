@@ -1,29 +1,19 @@
 /** Marca de Firmatech en el panel (login y barra de navegación). */
-const Mark = ({ size }: { size: number }) => (
-  <svg width={size} height={size} viewBox="0 0 22 22" aria-hidden="true">
-    <rect x="1" y="1" width="20" height="20" fill="none" stroke="currentColor" strokeWidth="1.5" />
-    <path d="M6 16V6h9M6 11h6" fill="none" stroke="#ff7a1a" strokeWidth="2" />
-    <circle cx="16" cy="16" r="1.6" fill="#ff7a1a" />
+export const Icon = () => (
+  <svg width="24" height="24" viewBox="0 0 32 32" aria-hidden="true">
+    <rect width="32" height="32" rx="8" fill="#0f172a" />
+    <path
+      d="M12 25V12.5a4 4 0 0 1 4-4h4M9.5 15h9"
+      fill="none"
+      stroke="#ff5a1f"
+      strokeWidth="3.4"
+      strokeLinecap="round"
+    />
   </svg>
 )
 
-export const Icon = () => <Mark size={22} />
-
 export const Logo = () => (
-  <div
-    style={{
-      display: 'flex',
-      alignItems: 'center',
-      gap: 12,
-      fontFamily: 'ui-monospace, SFMono-Regular, Menlo, monospace',
-      fontWeight: 600,
-      fontSize: 20,
-      letterSpacing: '0.2em',
-    }}
-  >
-    <Mark size={30} />
-    <span>
-      FIRMATECH<span style={{ color: '#ff7a1a' }}>_</span>
-    </span>
-  </div>
+  <span style={{ fontSize: 32, fontWeight: 700, letterSpacing: '-0.03em' }}>
+    firma<span style={{ color: '#ff5a1f' }}>tech</span>
+  </span>
 )

@@ -3,6 +3,7 @@ import { redirect } from 'next/navigation'
 
 import { ProfileForm } from '@/components/auth/forms'
 import { ButtonLink } from '@/components/ui/Button'
+import { IconCart, IconPhone } from '@/components/ui/icons'
 import { getCustomer } from '@/lib/auth'
 
 import { salir } from '../actions'
@@ -14,43 +15,44 @@ export default async function CuentaPage() {
   if (!customer) redirect('/ingresar?next=/cuenta')
 
   return (
-    <section className="mx-auto max-w-6xl px-4 py-12 sm:px-6 md:py-16">
-      <div className="flex flex-wrap items-end justify-between gap-6 border-b border-line pb-8">
-        <div className="space-y-3">
-          <p className="label">
-            <span className="text-signal">C0</span> / Mi cuenta
-          </p>
-          <h1 className="text-3xl font-semibold tracking-tight text-ink">
-            Hola, {customer.nombre}
-          </h1>
-          <p className="font-mono text-sm text-muted">{customer.email}</p>
+    <section className="mx-auto max-w-7xl px-4 py-8 sm:px-6 md:py-10">
+      <div className="flex flex-wrap items-center justify-between gap-4">
+        <div>
+          <h1 className="text-3xl font-bold tracking-[-0.03em]">Hola, {customer.nombre}</h1>
+          <p className="mt-1 text-muted">{customer.email}</p>
         </div>
         <form action={salir}>
           <button
             type="submit"
-            className="font-mono text-xs uppercase tracking-widest text-muted hover:text-fault"
+            className="rounded-xl border border-line bg-card px-4 py-2.5 text-sm font-semibold hover:border-danger hover:text-danger"
           >
             Cerrar sesión
           </button>
         </form>
       </div>
 
-      <div className="mt-10 grid gap-8 lg:grid-cols-[1.3fr_1fr]">
-        <div className="space-y-8">
-          <Panel code="C1" title="Mis reparaciones">
-            <p className="text-sm text-muted">Todavía no tenés reparaciones registradas.</p>
-            <ButtonLink href="/turnos" variant="secondary">
-              Pedir turno
-            </ButtonLink>
+      <div className="mt-8 grid gap-4 lg:grid-cols-[1.4fr_1fr]">
+        <div className="space-y-4">
+          <Panel title="Mis reparaciones">
+            <Empty
+              icon={<IconPhone size={24} />}
+              texto="Todavía no tenés reparaciones registradas."
+              accion={<ButtonLink href="/turnos">Pedir turno</ButtonLink>}
+            />
           </Panel>
-          <Panel code="C2" title="Mis compras">
-            <p className="text-sm text-muted">Todavía no hiciste compras.</p>
-            <ButtonLink href="/tienda" variant="secondary">
-              Ir a la tienda
-            </ButtonLink>
+          <Panel title="Mis compras">
+            <Empty
+              icon={<IconCart size={24} />}
+              texto="Todavía no hiciste compras."
+              accion={
+                <ButtonLink href="/tienda" variant="secondary">
+                  Ir a la tienda
+                </ButtonLink>
+              }
+            />
           </Panel>
         </div>
-        <Panel code="C3" title="Mis datos">
+        <Panel title="Mis datos">
           <ProfileForm
             nombre={customer.nombre}
             apellido={customer.apellido}
@@ -62,22 +64,31 @@ export default async function CuentaPage() {
   )
 }
 
-function Panel({
-  code,
-  title,
-  children,
+function Panel({ title, children }: { title: string; children: React.ReactNode }) {
+  return (
+    <div className="rounded-2xl border border-line bg-card p-6">
+      <h2 className="mb-5 text-lg font-bold">{title}</h2>
+      {children}
+    </div>
+  )
+}
+
+function Empty({
+  icon,
+  texto,
+  accion,
 }: {
-  code: string
-  title: string
-  children: React.ReactNode
+  icon: React.ReactNode
+  texto: string
+  accion: React.ReactNode
 }) {
   return (
-    <div className="border border-line bg-panel">
-      <div className="flex items-center justify-between border-b border-line px-5 py-3">
-        <h2 className="text-sm font-semibold text-ink">{title}</h2>
-        <span className="font-mono text-[10px] text-muted">{code}</span>
-      </div>
-      <div className="space-y-5 p-5">{children}</div>
+    <div className="flex flex-wrap items-center gap-4 rounded-xl bg-bg p-4">
+      <span className="grid h-11 w-11 place-items-center rounded-xl bg-card text-muted">
+        {icon}
+      </span>
+      <p className="min-w-0 flex-1 text-sm text-muted">{texto}</p>
+      {accion}
     </div>
   )
 }

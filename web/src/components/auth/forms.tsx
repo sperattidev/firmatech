@@ -40,7 +40,7 @@ export function LoginForm({ next }: { next?: string }) {
         error={state.errors?.password}
       />
       <div className="flex items-center justify-between gap-4">
-        <Link href="/recuperar" className="text-sm text-muted hover:text-signal">
+        <Link href="/recuperar" className="text-sm font-medium text-muted hover:text-brand">
           Olvidé mi contraseña
         </Link>
         <Button type="submit" disabled={pending}>
@@ -57,10 +57,9 @@ export function RegisterForm() {
   if (state.ok) {
     return (
       <div className="space-y-4" role="status">
-        <p className="label text-ok">Cuenta creada</p>
+        <p className="text-sm font-bold text-ok">Cuenta creada</p>
         <p className="text-ink">
-          Te enviamos un correo a <strong className="font-mono text-signal">{state.message}</strong>
-          .
+          Te enviamos un correo a <strong>{state.message}</strong>.
         </p>
         <p className="text-sm text-muted">
           Abrí el enlace para confirmar tu cuenta y después ingresá. Si no lo ves, revisá spam.

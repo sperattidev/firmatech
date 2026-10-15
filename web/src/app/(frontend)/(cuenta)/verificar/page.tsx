@@ -23,7 +23,7 @@ export default async function VerificarPage({
   }
 
   return (
-    <AuthShell code="A5" title={ok ? 'Correo confirmado' : 'No pudimos confirmar'} intro={null}>
+    <AuthShell title={ok ? 'Correo confirmado' : 'No pudimos confirmar'} intro={null}>
       <div className="space-y-6">
         {ok ? (
           <FormMessage tone="ok">Tu cuenta está activa. Ya podés ingresar.</FormMessage>

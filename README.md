@@ -9,7 +9,7 @@ Tienda y servicio técnico (celulares, computadoras, tablets) de Firmat, Santa F
 | Web + API | Next.js 16 (App Router) + TypeScript estricto |
 | Backend / panel | Payload CMS 3 (corre dentro de Next.js, panel en `/admin`) |
 | Base de datos | PostgreSQL 17 |
-| Estilos | Tailwind CSS 4, tipografías IBM Plex Sans / Plex Mono |
+| Estilos | Tailwind CSS 4, tipografía DM Sans. Diseño "retail moderno": claro, naranja #FF5A1F + azul noche #0F172A |
 | Correo | Resend (verificación de cuenta y recuperar contraseña) |
 | Login de clientes | Email + contraseña, Google (OAuth con `arctic`) |
 | Infra | Docker Compose + Cloudflare Tunnel en el VPS (aislado de Sperway) |

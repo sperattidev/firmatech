@@ -30,7 +30,6 @@ export default async function IngresarPage({
 
   return (
     <AuthShell
-      code="A1"
       title="Ingresá a tu cuenta"
       intro={
         <p>
@@ -51,12 +50,9 @@ export default async function IngresarPage({
         </>
       )}
       <LoginForm next={next} />
-      <p className="mt-8 border-t border-line pt-6 text-sm text-muted">
+      <p className="mt-6 border-t border-line pt-5 text-sm text-muted">
         ¿No tenés cuenta?{' '}
-        <Link
-          href="/registro"
-          className="text-ink underline decoration-signal underline-offset-4 hover:text-signal"
-        >
+        <Link href="/registro" className="font-semibold text-brand hover:underline">
           Creala gratis
         </Link>
       </p>

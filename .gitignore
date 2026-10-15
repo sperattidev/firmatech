@@ -5,3 +5,6 @@ deploy/.env.production
 
 .DS_Store
 Thumbs.db
+
+# Prototipos de diseño locales (no van a producción)
+web/public/prototipos/
