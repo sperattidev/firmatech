@@ -1,0 +1,60 @@
+# Producción en el VPS compartido con Sperway.
+# Aislamiento total: proyecto, red y volúmenes propios; ningún puerto publicado en el host.
+# El único acceso público es el túnel de Cloudflare (servicio `tunnel`).
+name: firmatech
+
+services:
+  web:
+    image: firmatech-web:${FIRMATECH_VERSION:?definir FIRMATECH_VERSION}
+    restart: unless-stopped
+    env_file: .env.production
+    environment:
+      DATABASE_URL: postgres://firmatech:${POSTGRES_PASSWORD:?definir POSTGRES_PASSWORD}@db:5432/firmatech
+    volumes:
+      - media:/app/media
+    depends_on:
+      db:
+        condition: service_healthy
+    networks: [firmatech]
+    mem_limit: 768m
+    cpus: 1.0
+    logging: &logging
+      driver: json-file
+      options: { max-size: '10m', max-file: '3' }
+
+  db:
+    image: postgres:17-alpine
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: firmatech
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:?definir POSTGRES_PASSWORD}
+      POSTGRES_DB: firmatech
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    healthcheck:
+      test: ['CMD-SHELL', 'pg_isready -U firmatech -d firmatech']
+      interval: 10s
+      timeout: 5s
+      retries: 10
+    networks: [firmatech]
+    mem_limit: 512m
+    logging: *logging
+
+  tunnel:
+    image: cloudflare/cloudflared:2026.10.1
+    restart: unless-stopped
+    command: tunnel --no-autoupdate run
+    environment:
+      TUNNEL_TOKEN: ${CLOUDFLARE_TUNNEL_TOKEN:?definir CLOUDFLARE_TUNNEL_TOKEN}
+    depends_on: [web]
+    networks: [firmatech]
+    mem_limit: 128m
+    logging: *logging
+
+networks:
+  firmatech:
+    name: firmatech
+
+volumes:
+  pgdata:
+  media:

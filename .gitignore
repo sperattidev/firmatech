@@ -1,0 +1,7 @@
+# Secretos de despliegue
+deploy/.env
+deploy/.env.production
+*.pem
+
+.DS_Store
+Thumbs.db

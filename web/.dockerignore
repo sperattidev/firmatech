@@ -1,0 +1,14 @@
+node_modules
+.next
+.git
+.env
+.env.*
+!.env.example
+media
+coverage
+playwright-report
+test-results
+tests
+*.tsbuildinfo
+Dockerfile
+.dockerignore
